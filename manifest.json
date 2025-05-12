@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "小红书数据采集器Plus",
+  "version": "1.1.0",
+  "description": "小红书数据批量采集与分析工具，支持搜索抓取和主页抓取，可记录发布时间、封面、作者头像等多种字段。",
+  "action": {
+    "default_icon": {
+      "16": "common/images/icon16.png",
+      "48": "common/images/icon48.png",
+      "128": "common/images/icon128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": ["content.js"],
+      "matches": ["*://*.xiaohongshu.com/*"],
+      "run_at": "document_start"
+    }
+  ],
+  "host_permissions": ["*://*.xiaohongshu.com/*"],
+  "permissions": ["storage", "downloads"],
+  "icons": {
+    "16": "common/images/icon16.png",
+    "48": "common/images/icon48.png",
+    "128": "common/images/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "matches": ["*://*.xiaohongshu.com/*"],
+      "resources": ["common/scripts/pageInjectScript.js", "db.js"]
+    }
+  ]
+} 

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>小红书数据查看器 - 搜索数据</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+      .layout {
+        display: flex;
+        min-height: 100vh;
+      }
+      .sidebar {
+        width: 180px;
+        background-color: #f0f0f0;
+        color: #333;
+        padding: 20px 0;
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      }
+      .sidebar-title {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 30px;
+        color: #ff2442;
+        padding: 0 15px;
+      }
+      .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .sidebar-menu li {
+        padding: 15px 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .sidebar-menu li:hover {
+        background-color: #e0e0e0;
+      }
+      .sidebar-menu li.active {
+        background-color: #ff2442;
+        font-weight: bold;
+        color: white;
+      }
+      .content {
+        flex: 1;
+        margin-left: 180px;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .buttons {
+        display: flex;
+        gap: 10px;
+      }
+      .button {
+        padding: 8px 16px;
+        background-color: #ff2442;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .button:hover {
+        background-color: #e61e3c;
+      }
+      .refresh-button {
+        background-color: #4caf50;
+      }
+      .refresh-button:hover {
+        background-color: #45a049;
+      }
+      h1 {
+        color: #ff2442;
+        margin: 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #ff2442;
+        color: white;
+        position: relative;
+      }
+      th[data-column] {
+        cursor: pointer;
+      }
+      th[data-column]::after {
+        content: "";
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      th[data-column]:not(.sorted-asc):not(.sorted-desc)::after {
+        content: "";
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 15l5 5 5-5'/%3E%3Cpath d='M7 9l5-5 5 5'/%3E%3C/svg%3E");
+      }
+      th.sorted-asc::after {
+        content: "↑";
+      }
+      th.sorted-desc::after {
+        content: "↓";
+      }
+      tr:hover {
+        background-color: #f5f5f5;
+      }
+      .link {
+        color: #ff2442;
+        text-decoration: none;
+      }
+      .link:hover {
+        text-decoration: underline;
+      }
+      #status {
+        text-align: center;
+        margin: 20px 0;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <div class="sidebar">
+        <div class="sidebar-title">小红书数据查看器</div>
+        <ul class="sidebar-menu">
+          <li id="search-tab" class="active" onclick="window.location.href='../search_data/data.html'">搜索抓取</li>
+          <li id="homepage-tab" onclick="window.location.href='../home_data/data.html'">主页抓取</li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="container">
+          <div class="header">
+            <h1>搜索抓取数据</h1>
+            <div class="buttons">
+              <button id="refreshData" class="button refresh-button">
+                刷新数据
+              </button>
+              <button id="exportData" class="button">导出CSV</button>
+              <button id="exportTXT" class="button">导出TXT</button>
+              <button id="clearData" class="button">清除数据</button>
+            </div>
+          </div>
+          <div id="status">加载中...</div>
+          <table id="dataTable">
+            <thead>
+              <tr>
+                <th data-column="display_title">标题</th>
+                <th>链接</th>
+                <th data-column="type">类型</th>
+                <th>作者</th>
+                <th data-column="nickname">昵称</th>
+                <th data-column="liked_count">点赞数</th>
+                <th data-column="comment_count">评论数</th>
+                <th data-column="shared_count">分享数</th>
+                <th data-column="collected_count">收藏数</th>
+                <th data-column="timestamp">时间戳</th>
+              </tr>
+            </thead>
+            <tbody id="dataBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="../db.js"></script>
+    <script type="module" src="data.js"></script>
+  </body>
+</html> 

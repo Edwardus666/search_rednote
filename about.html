@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>小红书数据采集器 - 使用说明</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+      }
+      h1 {
+        color: #ff2442;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 28px;
+      }
+      h2 {
+        color: #ff2442;
+        margin-top: 30px;
+        font-size: 22px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+      }
+      p {
+        margin-bottom: 15px;
+      }
+      ul, ol {
+        margin-bottom: 20px;
+        padding-left: 25px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      .feature-section {
+        margin-bottom: 30px;
+      }
+      .highlight {
+        background-color: #ffe5e8;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+      .note {
+        background-color: #e5f5ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+      .button {
+        display: block;
+        width: 200px;
+        margin: 30px auto;
+        padding: 10px;
+        background-color: #ff2442;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+      .button:hover {
+        background-color: #e61e3c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>小红书数据采集器</h1>
+      
+      <div class="highlight">
+        <p>这是一个用于采集和查看小红书平台数据的Chrome扩展工具，支持搜索抓取和主页抓取两种模式。</p>
+      </div>
+      
+      <h2>功能介绍</h2>
+      
+      <div class="feature-section">
+        <h3>1. 搜索抓取</h3>
+        <p>自动抓取在小红书搜索页面的结果数据，包含以下信息：</p>
+        <ul>
+          <li>标题</li>
+          <li>链接</li>
+          <li>类型（图文、视频等）</li>
+          <li>作者及昵称</li>
+          <li>点赞数</li>
+          <li>评论数</li>
+          <li>分享数</li>
+          <li>收藏数</li>
+          <li>时间戳</li>
+        </ul>
+      </div>
+      
+      <div class="feature-section">
+        <h3>2. 主页抓取</h3>
+        <p>自动抓取小红书用户主页的笔记数据，包含以下信息：</p>
+        <ul>
+          <li>标题</li>
+          <li>链接</li>
+          <li>类型（图文、视频等）</li>
+          <li>作者及昵称</li>
+          <li>点赞数</li>
+          <li>时间戳</li>
+        </ul>
+      </div>
+      
+      <h2>使用方法</h2>
+      
+      <ol>
+        <li><strong>安装插件</strong>：将插件安装到Chrome浏览器中</li>
+        <li><strong>浏览小红书</strong>：
+          <ul>
+            <li>搜索抓取：前往小红书搜索页面，输入关键词进行搜索，滚动浏览搜索结果</li>
+            <li>主页抓取：访问用户主页，滚动浏览用户发布的内容</li>
+          </ul>
+        </li>
+        <li><strong>查看数据</strong>：点击浏览器右上角的插件图标，选择"查看搜索数据"或"查看主页数据"</li>
+        <li><strong>数据管理</strong>：
+          <ul>
+            <li>刷新：点击"刷新数据"按钮，更新显示最新抓取的数据</li>
+            <li>排序：点击表格标题栏可按相应列进行排序</li>
+            <li>导出：点击"导出CSV"或"导出TXT"，将数据导出为相应格式</li>
+            <li>清除：点击"清除数据"可删除所有已抓取的数据</li>
+          </ul>
+        </li>
+      </ol>
+      
+      <div class="note">
+        <p><strong>注意事项：</strong></p>
+        <ul>
+          <li>本扩展仅用于学习和研究，请遵守小红书平台的使用条款和协议</li>
+          <li>数据存储在浏览器本地，不会上传或分享到任何服务器</li>
+          <li>搜索数据和主页数据分开存储，互不干扰</li>
+          <li>清除数据操作不可撤销，请谨慎操作</li>
+        </ul>
+      </div>
+      
+      <a href="javascript:history.back()" class="button">返回</a>
+    </div>
+  </body>
+</html> 
